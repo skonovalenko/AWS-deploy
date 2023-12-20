@@ -1,0 +1,25 @@
+version: 0.2
+phases:
+    install:
+        runtime-versions:
+            python: 3.7
+        commands:
+            - pip3 install pytest
+    pre_build:
+        commands:
+            - echo pre build
+    build:
+        commands:
+            - python -m pytest --junitxml=pytest_reports/pytest_report.xml
+    post_build:
+        commands:
+            - echo post build 
+reports:
+    pytest_reports:
+        files:
+            - pytest_report.xml
+        base-directory: pytest_reports/
+        file-format: JUNITXML  # Move this line to the correct indentation level
+artifacts:
+    files:
+        - '**/*'
